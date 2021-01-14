@@ -1,23 +1,26 @@
 {% extends 'TodoApp/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <form action="" method="POST">
         {% csrf_token %}
-        <div>
-            {{ form }}
-            <input type="submit" value="update">
+        {{ form|crispy }}
+        <div class="input-group-append pt-3">
+            <button class="btn btn-primary w-25" type="submit">update <i class="fas fa-edit"></i></button>
         </div>
     </form>
-    {% for task in tasks %}
-        <div>
-            {% if task.complete == True %}
-                <s>{{ task }}</s>
-            {% else %}
-                <span>{{ task }}</span>
-            {% endif %}
-            <a href="{% url 'delete' task.id %}" class="delete">
-                <i class="fas fa-trash"></i>
-            </a>
-        </div>
-    {% endfor %}
+    <div class="list-group rounded-0 mt-5">
+        {% for task in tasks %}
+            <div class="list-group-item">
+                {% if task.complete == True %}
+                    <s>{{ task }}</s>
+                {% else %}
+                    <span>{{ task }}</span>
+                {% endif %}
+                <div class="mt-2">
+                    <a class="btn btn-danger" href="{% url 'delete' task.id %}">delete <i class="fas fa-trash"></i></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
