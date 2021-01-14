@@ -3,12 +3,21 @@
 {% block content %}
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="update">
-    </form>
-    <!-- {% for task in tasks %}
         <div>
-            {{ task }}
+            {{ form }}
+            <input type="submit" value="update">
         </div>
-    {% endfor %} -->
+    </form>
+    {% for task in tasks %}
+        <div>
+            {% if task.complete == True %}
+                <s>{{ task }}</s>
+            {% else %}
+                <span>{{ task }}</span>
+            {% endif %}
+            <a href="{% url 'delete' task.id %}" class="delete">
+                <i class="fas fa-trash"></i>
+            </a>
+        </div>
+    {% endfor %}
 {% endblock %}

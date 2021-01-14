@@ -23,10 +23,11 @@ class IndexView(View):
 
 class UpdateView(View):
     def get(self, request, id):
-        task = Task.objects.get(id=id)
+        tasks = Task.objects.all()
+        task = tasks.get(id=id)
         form = TaskForm(instance=task)
 
-        context = {'form':form}
+        context = {'tasks':tasks, 'form':form}
 
         return render(request, 'TodoApp/update.html', context)
 
@@ -39,3 +40,8 @@ class UpdateView(View):
 
         return redirect('/')
 
+
+def delete(request, id):
+    task = Task.objects.get(id=id)
+    task.delete()
+    return redirect('/')

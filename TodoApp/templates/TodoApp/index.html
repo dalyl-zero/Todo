@@ -1,15 +1,24 @@
 {% extends 'TodoApp/base.html' %}
  
 {% block content %}
-    <form action="/" method="POST">
+    <form action="" method="POST">
         {% csrf_token %}
-        {{ form.title }}
-        <input type="submit" value="add">
+        <div>
+            {{ form.title }}
+            <input type="submit" value="add">
+        </div>
     </form>
     {% for task in tasks %}
         <div>
-            <span>{{ task }}</span>
+            {% if task.complete == True %}
+                <s>{{ task }}</s>
+            {% else %}
+                <span>{{ task }}</span>
+            {% endif %}
             <a href="{% url 'update' task.id %}">update</a>
+            <a href="{% url 'delete' task.id %}" class="delete">
+                <i class="fas fa-trash"></i>
+            </a>
         </div>
     {% endfor %}
 {% endblock %}
