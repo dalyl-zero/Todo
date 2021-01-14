@@ -1,4 +1,14 @@
 {% extends 'TodoApp/base.html' %}
  
 {% block content %}
+    <form action="/" method="POST">
+        {% csrf_token %}
+        {{ form.title }}
+        <input type="submit" value="add">
+    </form>
+    {% for task in tasks %}
+        <div>
+            {{ task }}
+        </div>
+    {% endfor %}
 {% endblock %}

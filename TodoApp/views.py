@@ -1,12 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
+from .models import Task
+from .forms import TaskForm
 
-# Create your views here.
 
 class IndexView(View):
     def get(self, request):
-        return render(request, 'TodoApp/index.html')
+        tasks = Task.objects.all()
+        form = TaskForm()
+
+        context = {'tasks':tasks, 'form':form}
+
+        return render(request, 'TodoApp/index.html', context)
 
     def post(self, request):
-        pass
+        form = TaskForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+        return redirect('/')
 
