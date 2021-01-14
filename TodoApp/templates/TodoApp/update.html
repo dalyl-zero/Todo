@@ -5,8 +5,8 @@
     <form action="" method="POST">
         {% csrf_token %}
         {{ form|crispy }}
-        <div class="input-group-append pt-3">
-            <button class="btn btn-primary w-25" type="submit">update <i class="fas fa-edit"></i></button>
+        <div class="input-group-append pt-2">
+            <button class="btn btn-primary w-2" type="submit">update <i class="fas fa-edit"></i></button>
         </div>
     </form>
     <div class="list-group rounded-0 mt-5">
@@ -17,7 +17,7 @@
                 {% else %}
                     <span>{{ task }}</span>
                 {% endif %}
-                <div class="mt-2">
+                <div class="mt-2 d-flex">
                     <a class="btn btn-danger" href="{% url 'delete' task.id %}">delete <i class="fas fa-trash"></i></a>
                 </div>
             </div>

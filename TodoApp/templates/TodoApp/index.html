@@ -5,7 +5,7 @@
     <form action="" method="POST">
         {% csrf_token %}
         {{ form.title|as_crispy_field }}
-        <div class="input-group-append pt-3">
+        <div class="input-group-append pt-2">
             <button class="btn btn-primary w-25" type="submit">add <i class="fas fa-plus-circle"></i></button>
         </div>
     </form>
