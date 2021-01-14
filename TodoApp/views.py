@@ -5,7 +5,7 @@ from django.views import View
 
 class IndexView(View):
     def get(self, request):
-        pass
+        return render(request, 'TodoApp/index.html')
 
     def post(self, request):
         pass
